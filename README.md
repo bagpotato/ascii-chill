@@ -4,13 +4,13 @@ Calm animations to leave running in your terminal. Each one draws itself in a fe
 
 <table align="center">
   <tr>
-    <td align="center"><img src="assets/blackhole.png" width="280"><br><sub><b>Black hole</b><br><code>art.py</code></sub></td>
-    <td align="center"><img src="assets/starry_night.png" width="280"><br><sub><b>The Starry Night</b><br><code>starry_night.py</code></sub></td>
-    <td align="center"><img src="assets/campfire.png" width="280"><br><sub><b>Campfire</b><br><code>campfire.py</code></sub></td>
+    <td align="center"><img src="assets/blackhole.gif" width="280"><br><sub><b>Black hole</b><br><code>art.py</code></sub></td>
+    <td align="center"><img src="assets/starry_night.gif" width="280"><br><sub><b>The Starry Night</b><br><code>starry_night.py</code></sub></td>
+    <td align="center"><img src="assets/campfire.gif" width="280"><br><sub><b>Campfire</b><br><code>campfire.py</code></sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="assets/coffee.png" width="280"><br><sub><b>Coffee</b><br><code>coffee.py</code></sub></td>
-    <td align="center"><img src="assets/cat.png" width="280"><br><sub><b>Sleeping cat</b><br><code>cat.py</code></sub></td>
+    <td align="center"><img src="assets/coffee.gif" width="280"><br><sub><b>Coffee</b><br><code>coffee.py</code></sub></td>
+    <td align="center"><img src="assets/cat.gif" width="280"><br><sub><b>Sleeping cat</b><br><code>cat.py</code></sub></td>
     <td></td>
   </tr>
 </table>
@@ -101,7 +101,7 @@ The bottom line of each animation shows the time, a few facts about the scene, a
 ## Structure
 
 ```
-assets/            screenshots shown in the README
+assets/            animated previews shown in the README
 menu.py            menu to launch the animations
 art.py             black hole
 starry_night.py    the starry night
