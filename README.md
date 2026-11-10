@@ -1,24 +1,24 @@
 # ascii · chill
 
-Animaciones tranquilas para dejar corriendo en la terminal. Cada una se dibuja sola en unos segundos y después se queda en bucle. Todo son caracteres ASCII con color, generados en tiempo real con Python y NumPy.
+Calm animations to leave running in your terminal. Each one draws itself in a few seconds and then loops. Everything is colored ASCII characters, generated in real time with Python and NumPy.
 
-## Animaciones
+## Animations
 
-| Archivo | Escena | Qué pasa |
+| File | Scene | What happens |
 | --- | --- | --- |
-| `art.py` | Agujero negro | Un anillo de luz se traza, respira, y de un destello sale el disco de acreción girando. |
-| `starry_night.py` | La noche estrellada | El cielo de Van Gogh: se encienden las estrellas, entra el viento, se enrollan los remolinos y crecen el pueblo y los cipreses. |
-| `campfire.py` | Fogata | Troncos, piedras y tres chispazos hasta que prende. Llamas, brasas, humo y un chasquido de chispas cada pocos segundos. |
-| `coffee.py` | Café | Aparece la taza, cae el chorro y el café se queda humeando mientras la crema gira despacio. |
-| `cat.py` | Gato durmiendo | Un gato atigrado se acurruca en su cojín, se le cierran los ojos y se duerme. Respira, sueña y de vez en cuando mueve una oreja. |
+| `art.py` | Black hole | A ring of light traces itself, breathes, and in a flash the spinning accretion disk emerges. |
+| `starry_night.py` | The Starry Night | Van Gogh's sky: the stars light up, the wind rolls in, the swirls coil, and the village and cypresses grow. |
+| `campfire.py` | Campfire | Logs, stones and three sparks until it catches. Flames, embers, smoke and a crackle of sparks every few seconds. |
+| `coffee.py` | Coffee | The cup appears, the stream pours in, and the coffee sits steaming while the crema slowly swirls. |
+| `cat.py` | Sleeping cat | A tabby cat curls up on its cushion, its eyes close and it falls asleep. It breathes, dreams, and now and then twitches an ear. |
 
-## Requisitos
+## Requirements
 
-- Python 3.9 o superior
+- Python 3.9 or higher
 - NumPy
-- Una terminal con color de 24 bits: Windows Terminal, kitty, Alacritty, WezTerm, iTerm2, GNOME Terminal…
+- A terminal with 24-bit color: Windows Terminal, kitty, Alacritty, WezTerm, iTerm2, GNOME Terminal…
 
-## Instalación
+## Installation
 
 ```bash
 git clone https://github.com/bagpotato/ascii-chill.git
@@ -26,79 +26,77 @@ cd ascii-chill
 pip install numpy
 ```
 
-## Uso
+## Usage
 
-Con el menú:
+With the menu:
 
 ```bash
 python menu.py
 ```
 
-| Tecla | Acción |
+| Key | Action |
 | --- | --- |
-| Flechas, `w`/`s` o `j`/`k` | Mover la selección |
-| `Enter` o espacio | Lanzar la animación seleccionada |
-| `1`–`5` | Lanzar directamente |
-| `Ctrl+C` | Salir de la animación y volver al menú |
-| `q` o `Esc` | Salir |
+| Arrows, `w`/`s` or `j`/`k` | Move the selection |
+| `Enter` or space | Launch the selected animation |
+| `1`–`5` | Launch directly |
+| `Ctrl+C` | Exit the animation and return to the menu |
+| `q` or `Esc` | Quit |
 
-O cada animación por separado:
+Or run each animation on its own:
 
 ```bash
 python cat.py
 ```
 
-En Windows usa `py` en lugar de `python`:
+On Windows use `py` instead of `python`:
 
 ```
 py menu.py
 ```
 
-### Opciones
+### Options
 
-`--fps N` cambia los fotogramas por segundo (30 por defecto). Sirve tanto en el menú como en cada script:
+`--fps N` changes the frames per second (30 by default). It works both in the menu and in each script:
 
 ```bash
 python menu.py --fps 20
 python campfire.py --fps 20
 ```
 
-## Consejos
+## Tips
 
-- Las animaciones se adaptan al tamaño de la ventana, también si la cambias en marcha.
-- Cuanto más grande la terminal y más pequeña la fuente, más detalle. A partir de unas 150 columnas por 40 filas se ven como están pensadas.
-- Si va a tirones a pantalla completa, baja los fps. `campfire.py` es la más pesada.
+- The animations adapt to the window size, even if you resize it while they run.
+- The bigger the terminal and the smaller the font, the more detail you get. From about 150 columns by 40 rows they look the way they were designed to.
+- If it stutters in full screen, lower the fps. `campfire.py` is the heaviest.
 
-## Problemas habituales en Windows
+## Common problems on Windows
 
-**`python art.py` no hace nada y no da error.** Windows trae un alias de `python` que apunta a la Microsoft Store. Usa `py`, o desactiva los alias de `python.exe` y `python3.exe` en *Configuración → Aplicaciones → Configuración avanzada de aplicaciones → Alias de ejecución de aplicaciones*.
+**`python art.py` does nothing and shows no error.** Windows ships a `python` alias that points to the Microsoft Store. Use `py`, or turn off the `python.exe` and `python3.exe` aliases in *Settings → Apps → Advanced app settings → App execution aliases*.
 
-**Los colores salen mal o aparecen códigos raros.** La consola antigua (`cmd.exe` clásico) no muestra bien el color de 24 bits. Ábrelo en Windows Terminal.
+**Colors look wrong or strange codes appear.** The legacy console (classic `cmd.exe`) doesn't display 24-bit color properly. Open it in Windows Terminal.
 
-## Cómo funciona
+## How it works
 
-Cada script es independiente y sigue la misma receta:
+Each script is self-contained and follows the same recipe:
 
-1. Se crea una rejilla con las coordenadas de cada celda de la terminal, corregidas para que un círculo se vea redondo aunque los caracteres sean más altos que anchos.
-2. Una función `frame(t, rejilla)` calcula con NumPy, para todas las celdas a la vez, qué carácter y qué color tocan en el instante `t`. No se guarda estado entre fotogramas: la escena entera es una función del tiempo.
-3. El resultado se convierte en texto con secuencias ANSI de color y se escribe de una vez en la pantalla alternativa de la terminal, así que al salir la terminal queda como estaba.
+1. A grid is created with the coordinates of every terminal cell, corrected so that a circle looks round even though characters are taller than they are wide.
+2. A `frame(t, grid)` function uses NumPy to compute, for all cells at once, which character and color apply at time `t`. No state is kept between frames: the whole scene is a function of time.
+3. The result is converted to text with ANSI color sequences and written in one go to the terminal's alternate screen, so the terminal is left as it was when you exit.
 
-La línea inferior de cada animación muestra el tiempo, un par de datos de la escena y los fps reales.
+The bottom line of each animation shows the time, a few facts about the scene, and the actual fps.
 
-## Estructura
+## Structure
 
 ```
-menu.py            menú para lanzar las animaciones
-art.py             agujero negro
-starry_night.py    la noche estrellada
-campfire.py        fogata
-coffee.py          café
-cat.py             gato durmiendo
+menu.py            menu to launch the animations
+art.py             black hole
+starry_night.py    the starry night
+campfire.py        campfire
+coffee.py          coffee
+cat.py             sleeping cat
 ```
 
-Para añadir una animación nueva al menú basta con crear el script con una función `main()` y añadir una línea a la lista `SCENES` de `menu.py`.
+To add a new animation to the menu, just create the script with a `main()` function and add a line to the `SCENES` list in `menu.py`.
 
-## Créditos
-
-- `art.py` nació de [este reel de Instagram](https://www.instagram.com/reel/DfgG102pfVQ/) con un agujero negro en ASCII.
-- `starry_night.py` es una interpretación libre de *La noche estrellada* de Vincent van Gogh (1889).
+## Credits
+- `starry_night.py` is a free interpretation of *The Starry Night* by Vincent van Gogh (1889).
